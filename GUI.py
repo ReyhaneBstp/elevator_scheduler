@@ -1,26 +1,22 @@
 import sys
-
+import functools 
+from functools import partial
 from PyQt6.QtCore import QSize, Qt
 from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton , QWidget
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6 import QtCore
 from PyQt6.QtCore import Qt
+from PyQt6.QtGui import *
 import elevator
 
 
 
-class MainWindow(QMainWindow):
+class MainWindow(QMainWindow , QWidget):
     def __init__(self):
 
         super().__init__()
 
-
-        self.centralwidget = QWidget()
-        self.setCentralWidget(self.centralwidget)
-        
-        #self.setStyleSheet("background-color : gray ")
-        #self.setStyleSheet("background-image: url(elev.jpg);background-repeat: no-repeat; background-position: center ; width:600 ; height:800")
         self.elev1 = []
         self.elev2 = []
         self.elev3 = []  
@@ -29,14 +25,9 @@ class MainWindow(QMainWindow):
         self.create_elevators()
         self.setWindowTitle("elevator")
         self.setFixedSize(QSize(800, 600))
-
+       
         
-        
-
- 
-
-
-    def create_elevators(self):
+    def create_elevators(self , *args):
 
 
         for i in range(15):
@@ -44,7 +35,7 @@ class MainWindow(QMainWindow):
             font.setPointSize(16)
             self.elev1.append(QPushButton(self))
             self.elev1[i].setFont(font)
-            self.elev1[i].setGeometry(270, 480 - 30 * i,60,30)
+            self.elev1[i].setGeometry(270, 500 - 30 * i,60,30)
             self.elev1[i].setText(str(i+1))
             self.elev1[i].setStyleSheet("color: black;background-color : lightgray ;border-radius : 50;border : 1px solid darkgray")
 
@@ -53,7 +44,7 @@ class MainWindow(QMainWindow):
             font.setPointSize(16)
             self.elev2.append(QPushButton(self))
             self.elev2[i].setFont(font)
-            self.elev2[i].setGeometry(360, 480 - 30 * i,60,30)
+            self.elev2[i].setGeometry(360, 500 - 30 * i,60,30)
             self.elev2[i].setText( str(i+1))
             self.elev2[i].setStyleSheet("color: black;background-color : lightgray ;border-radius : 50;border : 1px solid darkgray")
            
@@ -63,27 +54,40 @@ class MainWindow(QMainWindow):
             font.setPointSize(16)
             self.elev3.append(QPushButton(self))
             self.elev3[i].setFont(font)
-            self.elev3[i].setGeometry(450, 480 - 30 * i,60,30)
+            self.elev3[i].setGeometry(450, 500 - 30 * i,60,30)
             self.elev3[i].setText(str(i+1))
             self.elev3[i].setStyleSheet("color: black;background-color : lightgray ;border-radius : 50;border : 1px solid darkgray ")
 
 
-        for i in range(3):
+        for j in range(2):
+            font = self.font()
+            font.setPointSize(11)
             self.textbox.append(QLineEdit(self))
-            self.textbox[i].setGeometry(230+110*i, 520 ,100,40)
-            self.textbox[i].setStyleSheet("border-radius : 20;border : 2px solid black;background-color : lightgreen")
-            self.okbtn.append(QPushButton("OK", self))
-            self.okbtn[i].setGeometry(295+110*i, 525, 32, 32)
-            self.okbtn[i].setStyleSheet("color: lightgray;border-radius : 16;border : 2px solid black;background-color : darkgreen")
-           
+            if(j==0):
+                self.textbox[j].setToolTip("enter current floor")
+            if(j==1):
+                self.textbox[j].setToolTip("enter destination floor")
+                
+            self.textbox[j].setGeometry(125+445*j, 270 ,100,40)
+            self.textbox[j].setFont(font)
+            self.textbox[j].setStyleSheet("border-radius : 20;border : 2px solid black;background-color : lightgreen")
+            self.okbtn.append(QPushButton("OK",self))
+            self.okbtn[j].setGeometry(190+445*j, 275, 32, 32)
+            self.okbtn[j].setStyleSheet("color: lightgray;border-radius : 16;border : 2px solid black;background-color : darkgreen")
+            self.okbtn[j].clicked.connect(lambda: self.setExtReq(j))
 
-        
-        
- 
+   
+    
+    elevator1 = elevator.Elevator(1)
+    elevator2 = elevator.Elevator(2)
+    elevator3 = elevator.Elevator(3)
 
+    def setExtReq(self,j):     
+        elevator1.add_external_req(self.textbox[0].text(),self.textbox[1].text())
+        print(self.textbox[0].text(),self.textbox[1].text())
+      
+    
 
-
-        
 
 
 
@@ -92,11 +96,22 @@ class MainWindow(QMainWindow):
             self.elev1[i].setStyleSheet("color: black;background-color : lightgray ;border-radius : 50;border : 1px solid darkgray")
             self.elev2[i].setStyleSheet("color: black;background-color : lightgray ;border-radius : 50;border : 1px solid darkgray")
             self.elev3[i].setStyleSheet("color: black;background-color : lightgray ;border-radius : 50;border : 1px solid darkgray")
+        if(elevator1.is_stop):
+            self.elev1[elevator1.current_floor].setStyleSheet("color: lightgray;background-color : green;border-radius : 50;border : 2px solid black")
+        else:
+            self.elev1[elevator1.current_floor].setStyleSheet("color: lightgray;background-color : darkorange;border-radius : 50;border : 2px solid black")
 
-        self.elev1[elevator1.current_floor].setStyleSheet("color: lightgray;background-color : green;border-radius : 50;border : 2px solid black")
-        self.elev2[elevator2.current_floor].setStyleSheet("color: lightgray;background-color : green;border-radius : 50;border : 2px solid black")
-        self.elev3[elevator3.current_floor].setStyleSheet("color: lightgray;background-color : green;border-radius : 50;border : 2px solid black")
-            
+        if(elevator2.is_stop):
+            self.elev2[elevator2.current_floor].setStyleSheet("color: lightgray;background-color : green;border-radius : 50;border : 2px solid black")
+        else:
+            self.elev2[elevator2.current_floor].setStyleSheet("color: lightgray;background-color : darkorange;border-radius : 50;border : 2px solid black")
+
+        if(elevator3.is_stop):
+            self.elev3[elevator3.current_floor].setStyleSheet("color: lightgray;background-color : green;border-radius : 50;border : 2px solid black")
+        else:
+            self.elev3[elevator3.current_floor].setStyleSheet("color: lightgray;background-color : darkorange;border-radius : 50;border : 2px solid black")
+       
+   
 
 elevator1 = elevator.Elevator(1)
 elevator2 = elevator.Elevator(2)
@@ -110,7 +125,7 @@ elevator3.is_stop=False
 
 stylesheet = """
     MainWindow {
-        border-image: url("elev.jpg"); 
+        border-image: url("elev1.jpg"); 
         background-repeat: no-repeat; 
         background-position: center;
         
@@ -119,6 +134,9 @@ stylesheet = """
 
 app = QApplication(sys.argv)
 app.setStyleSheet(stylesheet)
+
+
+
 
 
 
