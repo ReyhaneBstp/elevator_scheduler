@@ -22,7 +22,7 @@ class MainWindow(QMainWindow , QWidget):
         self.elev3 = []  
         self.textbox = [] 
         self.okbtn=[] 
-        self.remain=[]
+        self.saveInfo=[]
         self.create_elevators()
         self.setWindowTitle("elevator")
         self.setFixedSize(QSize(800, 600))
@@ -40,7 +40,7 @@ class MainWindow(QMainWindow , QWidget):
             self.elev1[i].setGeometry(270, 505 - 30 * i,60,30)
             self.elev1[i].setText(str(i+1))
             self.elev1[i].setStyleSheet("color: black;background-color : lightgray ;border-radius : 50;border : 1px solid darkgray")
-            self.elev1[i].clicked.connect(lambda: self.setIntReq(i,j))
+            self.elev1[i].clicked.connect(partial(self.setIntReq,i,j))
            
 
         for i in range(15):
@@ -52,7 +52,7 @@ class MainWindow(QMainWindow , QWidget):
             self.elev2[i].setGeometry(360, 505 - 30 * i,60,30)
             self.elev2[i].setText( str(i+1))
             self.elev2[i].setStyleSheet("color: black;background-color : lightgray ;border-radius : 50;border : 1px solid darkgray")
-            self.elev2[i].clicked.connect(lambda: self.setIntReq(i,j))
+            self.elev2[i].clicked.connect(partial(self.setIntReq,i,j))
             
             
             
@@ -67,7 +67,7 @@ class MainWindow(QMainWindow , QWidget):
             self.elev3[i].setGeometry(450, 505 - 30 * i,60,30)
             self.elev3[i].setText(str(i+1))
             self.elev3[i].setStyleSheet("color: black;background-color : lightgray ;border-radius : 50;border : 1px solid darkgray ")
-            self.elev3[i].clicked.connect(lambda: self.setIntReq(i,j))
+            self.elev3[i].clicked.connect(partial(self.setIntReq,i,j))
     
 
 
@@ -101,16 +101,16 @@ class MainWindow(QMainWindow , QWidget):
         print(self.textbox[0].text(),self.textbox[1].text())
 
     def setIntReq(self,i,j):   
-
         if(j==1):
-            elevator1.add_internal_req(self.elev1[i])
-            print(self.elev1[i])
+            elevator1.add_internal_req(i+1)
+            print(i+1)
         if(j==2):
-            elevator2.add_internal_req(self.elev2[i])
-            print(self.elev2[i])
+            elevator2.add_internal_req(i+1)
+            print(i+1)
         if(j==3):
-            elevator3.add_internal_req(self.elev3[i])
-            print(self.elev3[i])
+            elevator3.add_internal_req(i+1)
+            print(i+1)
+
       
     
 
