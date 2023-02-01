@@ -31,14 +31,13 @@ app.setStyleSheet(stylesheet)
 window = GUI.MainWindow(elevator1, elevator2, elevator3)
 window.show()
 while True:
-    elevator1.move()
-    elevator2.move()
-    elevator3.move()
-    window.update()
+    if not window.pause:
+        elevator1.move()
+        elevator2.move()
+        elevator3.move()
+        window.update()
     QtTest.QTest.qWait(500)
-
-
-app.exec()
-
+    # if window.close:
+    #     break
 
 sys.exit(app.exec())

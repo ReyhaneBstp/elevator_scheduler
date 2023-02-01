@@ -29,7 +29,7 @@ class MainWindow(QMainWindow , QWidget):
         self.create_elevators()
         self.setWindowTitle("elevator")
         self.setFixedSize(QSize(800, 600))
-        
+        self.pause = False
        
         
     def create_elevators(self):
@@ -102,7 +102,13 @@ class MainWindow(QMainWindow , QWidget):
             self.Btn2[j].setFont(font)
             self.Btn2[j].setGeometry(168,275+50*j,28,28)
             self.Btn2[j].setStyleSheet("color: black;border-radius : 14;border : 2px solid black;background-color :darkgray")
-    
+        self.Btn2[0].clicked.connect(self.pause_elevator)
+        self.Btn2[1].clicked.connect(self.resume_elevator)
+
+    def pause_elevator(self):
+        self.pause = True
+    def resume_elevator(self):
+        self.pause = False
 
     def setExtReq(self):     
         elv = elevator.Elevator.nearest_elevator(self.elevator1,self.elevator2,self.elevator3,int(self.textbox[0].text()))
