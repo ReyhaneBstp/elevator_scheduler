@@ -28,13 +28,13 @@ class MainWindow(QMainWindow , QWidget):
         self.saveInfo=[]
         self.Btn1=[]
         self.Btn2=[]
-        self.create_elevators(elevator1,elevator2,elevator3)
+        self.create_elevators()
         self.setWindowTitle("elevator")
         self.setFixedSize(QSize(800, 600))
         
        
         
-    def create_elevators(self , elevator1,elevator2,elevator3):
+    def create_elevators(self):
 
         
 
@@ -130,23 +130,23 @@ class MainWindow(QMainWindow , QWidget):
             self.elev2[i].setStyleSheet("color: black;background-color : lightgray ;border-radius : 50;border : 1px solid darkgray")
             self.elev3[i].setStyleSheet("color: black;background-color : lightgray ;border-radius : 50;border : 1px solid darkgray")
             if i in self.elevator1.internal_req:
-                self.elev1[i-1].setStyleSheet("color: black;background-color : red ;border-radius : 50;border : 2px solid black")
+                self.elev1[i-1].setStyleSheet("color: black;background-color : darkgray ;border-radius : 50;border : 2px solid black")
 
             if i in self.elevator2.internal_req:
-                self.elev2[i-1].setStyleSheet("color: black;background-color : red ;border-radius : 50;border : 2px solid black")
+                self.elev2[i-1].setStyleSheet("color: black;background-color : darkgray ;border-radius : 50;border : 2px solid black")
                
             if i in self.elevator3.internal_req:
-                self.elev3[i-1].setStyleSheet("color: black;background-color : red ;border-radius : 50;border : 2px solid black")
+                self.elev3[i-1].setStyleSheet("color: black;background-color : darkgray ;border-radius : 50;border : 2px solid black")
             for j in range (len(elevator1.external_req)):
                 
                 if (self.elevator1.external_req[j][1]==i):
-                    self.elev1[i-1].setStyleSheet("color: black;background-color : red ;border-radius : 50;border : 2px solid black")
+                    self.elev1[i-1].setStyleSheet("color: black;background-color : darkgray ;border-radius : 50;border : 2px solid black")
             for j in range (len(elevator2.external_req)):
                 if (self.elevator2.external_req[j][1]==i):
-                    self.elev2[i-1].setStyleSheet("color: black;background-color : red ;border-radius : 50;border : 2px solid black")
+                    self.elev2[i-1].setStyleSheet("color: black;background-color : darkgray ;border-radius : 50;border : 2px solid black")
             for j in range (len(elevator3.external_req)):
                 if (self.elevator3.external_req[j][1]==i):
-                    self.elev3[i-1].setStyleSheet("color: black;background-color : red ;border-radius : 50;border : 2px solid black")
+                    self.elev3[i-1].setStyleSheet("color: black;background-color : darkgray ;border-radius : 50;border : 2px solid black")
     
 
         if(self.elevator1.is_stop):
