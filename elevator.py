@@ -26,7 +26,7 @@ class Elevator:
     def max_down(self):
         return min(self.internal_req + [x[0] for x in self.external_req])
 
-    def do(self):
+    def move(self):
         if self.internal_req == [] and self.external_req == []:
             self.is_stop = True
             self.log("No request")
@@ -109,4 +109,5 @@ class Elevator:
             return t
         else:
             return 0
-        
+    def nearest_elevator(elv1, elv2, elv3, floor):
+        return min([elv1, elv2, elv3], key=lambda x: x.arrival_time(floor))
