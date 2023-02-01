@@ -10,7 +10,8 @@ class Elevator:
         self.num = num
 
     def log(self,msg):
-        print("elevator " + self.num + ": " + msg)
+        #print("elevator " + self.num + ": " + msg)
+        (msg)
 
     def add_internal_req(self, floor):
         if floor not in self.internal_req:
