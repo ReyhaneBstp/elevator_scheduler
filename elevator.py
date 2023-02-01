@@ -1,7 +1,7 @@
 class Elevator:
     MAX_FLOOR = 15
 
-    def __init__(self,num : str):
+    def __init__(self, num: str):
         self.current_floor = 0
         self.direction = "UP"
         self.is_stop = True
@@ -9,8 +9,8 @@ class Elevator:
         self.external_req = []  # tuple (floor , destination)
         self.num = num
 
-    def log(self,msg):
-        #print("elevator " + self.num + ": " + msg)
+    def log(self, msg):
+        # print("elevator " + self.num + ": " + msg)
         (msg)
 
     def add_internal_req(self, floor):
@@ -70,7 +70,7 @@ class Elevator:
                 self.direction = "UP"
                 self.log("Change direction to UP")
 
-    def arrival_time(self  ,floor : int):
+    def arrival_time(self, floor: int):
         if self.current_floor < floor and self.direction == "UP":
             t = floor - self.current_floor
             for i in self.internal_req:
@@ -109,5 +109,6 @@ class Elevator:
             return t
         else:
             return 0
+
     def nearest_elevator(elv1, elv2, elv3, floor):
         return min([elv1, elv2, elv3], key=lambda x: x.arrival_time(floor))

@@ -1,16 +1,12 @@
 import sys
-from time import sleep
 
 from PyQt6 import QtTest
 from PyQt6.QtGui import *
 from PyQt6.QtWidgets import *
-from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QWidget
+from PyQt6.QtWidgets import QApplication
 
 import elevator
 import GUI
-
-
-
 
 elevator1 = elevator.Elevator(1)
 elevator2 = elevator.Elevator(2)
