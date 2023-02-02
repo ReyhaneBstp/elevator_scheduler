@@ -38,7 +38,7 @@ window.show()
 while True:
     if not window.pause:
         move()
-        window.update()
+    window.update()
     QtTest.QTest.qWait(500)
     # if window.close:
     #     break
