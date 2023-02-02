@@ -9,6 +9,8 @@ class Elevator:
         self.internal_req = []  # tuple (floor , age)
         self.external_req = []  # tuple (floor , destination, age)
         self.num = num
+        self.age_rate = 1
+        self.direction_keep_rate = 2
 
     def log(self, msg):
         print("elevator " + str(self.num) + ": " + msg)
@@ -19,6 +21,9 @@ class Elevator:
 
     def external_req_list(self):
         return [(x.floor,x.dest) for x in self.external_req]
+    
+    def req_list(self):
+        return self.internal_req_list() + [x.floor for x in self.external_req]
 
     def add_internal_req(self, floor):
         if floor not in self.internal_req_list():
@@ -68,20 +73,33 @@ class Elevator:
             self.external_req = [x for x in self.external_req if x.floor != self.current_floor]
             return
 
+        v_up = 0
+        v_down = 0
+        for f in self.internal_req + self.external_req:
+            if f.floor > self.current_floor:
+                v_up += 15 - (f.floor - self.current_floor)
+                v_up += f.age
+            elif f.floor < self.current_floor:
+                v_down += 15 - (self.current_floor - f.floor)
+                v_down += f.age
         if self.direction == "UP":
-            if self.current_floor < self.max_up():
+            if v_up * self.direction_keep_rate > v_down:
                 self.current_floor += 1
-                self.log(f"Move to {self.current_floor}")
+                self.log(f"Move up to {self.current_floor}")
             else:
-                self.direction = "DOWN"
-                self.log("Change direction to DOWN")
-        if self.direction == "DOWN":
-            if self.current_floor > self.max_down():
                 self.current_floor -= 1
-                self.log(f"Move to {self.current_floor}")
+                self.log(f"Move down to {self.current_floor}")
+                self.direction = "DOWN"
+        else:
+            if v_down * self.direction_keep_rate > v_up:
+                self.current_floor -= 1
+                self.log(f"Move down to {self.current_floor}")
             else:
+                self.current_floor += 1
+                self.log(f"Move up to {self.current_floor}")
                 self.direction = "UP"
-                self.log("Change direction to UP")
+
+
 
     def arrival_time(self, floor: int):
         if self.current_floor < floor and self.direction == "UP":
@@ -124,8 +142,8 @@ class Elevator:
             return 0
     def update_age(self):
         for i in self.internal_req:
-            i.age += 1
+            i.age += self.age_rate
         for i in self.external_req:
-            i.age += 1
+            i.age += self.age_rate
     def nearest_elevator(elv1, elv2, elv3, floor):
         return min([elv1, elv2, elv3], key=lambda x: x.arrival_time(floor))
