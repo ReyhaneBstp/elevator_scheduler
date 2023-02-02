@@ -86,7 +86,7 @@ class MainWindow(QMainWindow, QWidget):
             self.okbtn[j].setStyleSheet(
                 "color: lightgray;border-radius : 16;border : 2px solid black;background-color : black"
             )
-            self.okbtn[j].clicked.connect(lambda: self.setExtReq())
+            self.okbtn[j].clicked.connect(self.setExtReq)
 
         for j in range(2):
             self.Btn1.append(QPushButton("", self))
@@ -156,17 +156,17 @@ class MainWindow(QMainWindow, QWidget):
                     "color: black;background-color : darkgray ;border-radius : 50;border : 2px solid black"
                 )
             for j in range(len(self.elevator1.external_req)):
-                if self.elevator1.external_req[j][1] == i:
+                if self.elevator1.external_req[j][0] == i:
                     self.elev1[i].setStyleSheet(
                         "color: black;background-color : darkgray ;border-radius : 50;border : 2px solid black"
                     )
             for j in range(len(self.elevator2.external_req)):
-                if self.elevator2.external_req[j][1] == i:
+                if self.elevator2.external_req[j][0] == i:
                     self.elev2[i].setStyleSheet(
                         "color: black;background-color : darkgray ;border-radius : 50;border : 2px solid black"
                     )
             for j in range(len(self.elevator3.external_req)):
-                if self.elevator3.external_req[j][1] == i:
+                if self.elevator3.external_req[j][0] == i:
                     self.elev3[i].setStyleSheet(
                         "color: black;background-color : darkgray ;border-radius : 50;border : 2px solid black"
                     )
