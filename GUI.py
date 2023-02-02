@@ -141,32 +141,32 @@ class MainWindow(QMainWindow, QWidget):
             self.elev3[i].setStyleSheet(
                 "color: black;background-color : lightgray ;border-radius : 50;border : 1px solid darkgray"
             )
-            if i in self.elevator1.internal_req:
+            if i in self.elevator1.internal_req_list():
                 self.elev1[i].setStyleSheet(
                     "color: black;background-color : darkgray ;border-radius : 50;border : 2px solid black"
                 )
 
-            if i in self.elevator2.internal_req:
+            if i in self.elevator2.internal_req_list():
                 self.elev2[i].setStyleSheet(
                     "color: black;background-color : darkgray ;border-radius : 50;border : 2px solid black"
                 )
 
-            if i in self.elevator3.internal_req:
+            if i in self.elevator3.internal_req_list():
                 self.elev3[i].setStyleSheet(
                     "color: black;background-color : darkgray ;border-radius : 50;border : 2px solid black"
                 )
-            for j in range(len(self.elevator1.external_req)):
-                if self.elevator1.external_req[j][0] == i:
+            for j in range(len(self.elevator1.external_req_list())):
+                if self.elevator1.external_req_list()[j][0] == i:
                     self.elev1[i].setStyleSheet(
                         "color: black;background-color : darkgray ;border-radius : 50;border : 2px solid black"
                     )
-            for j in range(len(self.elevator2.external_req)):
-                if self.elevator2.external_req[j][0] == i:
+            for j in range(len(self.elevator2.external_req_list())):
+                if self.elevator2.external_req_list()[j][0] == i:
                     self.elev2[i].setStyleSheet(
                         "color: black;background-color : darkgray ;border-radius : 50;border : 2px solid black"
                     )
-            for j in range(len(self.elevator3.external_req)):
-                if self.elevator3.external_req[j][0] == i:
+            for j in range(len(self.elevator3.external_req_list())):
+                if self.elevator3.external_req_list()[j][0] == i:
                     self.elev3[i].setStyleSheet(
                         "color: black;background-color : darkgray ;border-radius : 50;border : 2px solid black"
                     )

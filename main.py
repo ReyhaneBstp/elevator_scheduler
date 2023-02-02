@@ -12,6 +12,13 @@ elevator1 = elevator.Elevator(1)
 elevator2 = elevator.Elevator(2)
 elevator3 = elevator.Elevator(3)
 
+def move():
+    elevator1.move()
+    elevator2.move()
+    elevator3.move()
+    elevator1.update_age()
+    elevator2.update_age()
+    elevator3.update_age()
 
 stylesheet = """
     MainWindow {
@@ -28,9 +35,7 @@ window = GUI.MainWindow(elevator1, elevator2, elevator3)
 window.show()
 while True:
     if not window.pause:
-        elevator1.move()
-        elevator2.move()
-        elevator3.move()
+        move()
         window.update()
     QtTest.QTest.qWait(500)
     # if window.close:
