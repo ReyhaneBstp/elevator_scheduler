@@ -1,4 +1,6 @@
 from request import Request
+
+
 class Elevator:
     MAX_FLOOR = 15
 
@@ -20,8 +22,8 @@ class Elevator:
         return [x.floor for x in self.internal_req]
 
     def external_req_list(self):
-        return [(x.floor,x.dest) for x in self.external_req]
-    
+        return [(x.floor, x.dest) for x in self.external_req]
+
     def req_list(self):
         return self.internal_req_list() + [x.floor for x in self.external_req]
 
@@ -36,13 +38,13 @@ class Elevator:
         l = self.internal_req + self.external_req
         if l == []:
             return self.current_floor
-        return max(l,key=lambda x : x.floor).floor
+        return max(l, key=lambda x: x.floor).floor
 
     def max_down(self):
         l = self.internal_req + self.external_req
         if l == []:
             return self.current_floor
-        return min(l,key=lambda x : x.floor).floor
+        return min(l, key=lambda x: x.floor).floor
 
     def move(self):
         if self.internal_req == [] and self.external_req == []:
@@ -54,14 +56,18 @@ class Elevator:
 
         if self.current_floor in self.internal_req_list():
             self.log(f"Stop at {self.current_floor}")
-            self.internal_req = [x for x in self.internal_req if x.floor != self.current_floor]
+            self.internal_req = [
+                x for x in self.internal_req if x.floor != self.current_floor
+            ]
             self.is_stop = True
             if self.current_floor in [x.floor for x in self.external_req]:
                 self.log(f"Stop at {self.current_floor} for external request")
                 reqs = [x for x in self.external_req if x.floor == self.current_floor]
                 for req in reqs:
                     self.internal_req.append(Request(req.dest))
-                self.add_external_req = [x for x in self.external_req if x.floor != self.current_floor]
+                self.add_external_req = [
+                    x for x in self.external_req if x.floor != self.current_floor
+                ]
             return
 
         if self.current_floor in [x.floor for x in self.external_req]:
@@ -70,7 +76,9 @@ class Elevator:
             for req in reqs:
                 self.internal_req.append(Request(req.dest))
             self.is_stop = True
-            self.external_req = [x for x in self.external_req if x.floor != self.current_floor]
+            self.external_req = [
+                x for x in self.external_req if x.floor != self.current_floor
+            ]
             return
 
         v_up = 0
@@ -98,8 +106,6 @@ class Elevator:
                 self.current_floor += 1
                 self.log(f"Move up to {self.current_floor}")
                 self.direction = "UP"
-
-
 
     def arrival_time(self, floor: int):
         if self.current_floor < floor and self.direction == "UP":
@@ -140,10 +146,12 @@ class Elevator:
             return t
         else:
             return 0
+
     def update_age(self):
         for i in self.internal_req:
             i.age += self.age_rate
         for i in self.external_req:
             i.age += self.age_rate
+
     def nearest_elevator(elv1, elv2, elv3, floor):
         return min([elv1, elv2, elv3], key=lambda x: x.arrival_time(floor))

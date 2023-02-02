@@ -12,6 +12,7 @@ elevator1 = elevator.Elevator(1)
 elevator2 = elevator.Elevator(2)
 elevator3 = elevator.Elevator(3)
 
+
 def move():
     elevator1.move()
     elevator2.move()
@@ -19,6 +20,7 @@ def move():
     elevator1.update_age()
     elevator2.update_age()
     elevator3.update_age()
+
 
 stylesheet = """
     MainWindow {
