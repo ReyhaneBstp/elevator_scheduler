@@ -17,7 +17,6 @@ class Elevator:
 
     def log(self, msg):
         print("elevator " + str(self.num) + ": " + msg)
-        # (msg)
 
     def internal_req_list(self):
         return [x.floor for x in self.internal_req]
@@ -34,6 +33,7 @@ class Elevator:
 
     def add_external_req(self, floor, destination):
         self.external_req.append(Request(floor, destination))
+        self.log(f"*external request from floor {floor} added*")
 
     def max_up(self):
         l = self.internal_req + self.external_req
@@ -66,7 +66,7 @@ class Elevator:
                 reqs = [x for x in self.external_req if x.floor == self.current_floor]
                 for req in reqs:
                     self.internal_req.append(Request(req.dest))
-                self.add_external_req = [
+                self.external_req = [
                     x for x in self.external_req if x.floor != self.current_floor
                 ]
             return
@@ -96,6 +96,7 @@ class Elevator:
                 self.current_floor += 1
                 self.log(f"Move up to {self.current_floor}")
             else:
+                self.log(f"---Change direction to DOWN---")
                 self.current_floor -= 1
                 self.log(f"Move down to {self.current_floor}")
                 self.direction = "DOWN"
@@ -104,6 +105,7 @@ class Elevator:
                 self.current_floor -= 1
                 self.log(f"Move down to {self.current_floor}")
             else:
+                self.log(f"---Change direction to UP---")
                 self.current_floor += 1
                 self.log(f"Move up to {self.current_floor}")
                 self.direction = "UP"

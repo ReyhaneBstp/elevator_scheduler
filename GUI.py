@@ -143,13 +143,10 @@ class MainWindow(QMainWindow, QWidget):
     def setIntReq(self, i, j):
         if j == 1:
             self.elevator1.add_internal_req(i)
-            print(i)
         if j == 2:
             self.elevator2.add_internal_req(i)
-            print(i)
         if j == 3:
             self.elevator3.add_internal_req(i)
-            print(i)
 
     def update(self):
         
