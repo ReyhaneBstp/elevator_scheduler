@@ -107,8 +107,8 @@ class MainWindow(QMainWindow, QWidget):
             "border : 2px solid black;background-color : darkgray;border-radius : 20"
         )
 
-        self.Btn2.append(QPushButton("懶", self))
-        font.setPointSize(18)
+        self.Btn2.append(QPushButton("", self))
+        font.setPointSize(16)
         self.Btn2[0].setFont(font)
         self.Btn2[0].setGeometry(167, 305, 32, 32)
         self.Btn2[0].setStyleSheet(
@@ -125,13 +125,13 @@ class MainWindow(QMainWindow, QWidget):
                 "color: darkgreen;border-radius : 16;border : 2px solid black;background-color : balck"
             )
         self.Btn2[0].clicked.connect(self.pause_elevator)
-        # self.Btn2[0].clicked.connect(self.resume_elevator)
 
     def pause_elevator(self):
         self.pause = not self.pause
-
-    # def resume_elevator(self):
-    # self.pause = False
+        if self.pause:
+            self.Btn2[0].setText("")
+        else:
+            self.Btn2[0].setText("")
 
     def setExtReq(self):
         elv = elevator.Elevator.nearest_elevator(
