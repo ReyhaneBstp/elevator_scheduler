@@ -29,7 +29,6 @@ class MainWindow(QMainWindow, QWidget):
         self.pause = False
 
     def create_elevators(self):
-        
         for i in range(16):
             j = 1
             font = self.font()
@@ -68,12 +67,12 @@ class MainWindow(QMainWindow, QWidget):
                 "color: black;background-color : lightgray ;border-radius : 50;border : 1px solid darkgray "
             )
             self.elev3[i].clicked.connect(partial(self.setIntReq, i, j))
-        self.rect=QLineEdit(self)
+        self.rect = QLineEdit(self)
         self.rect.setGeometry(580, 270, 60, 100)
         self.rect.setFont(font)
         self.rect.setStyleSheet(
-                "border : 2px solid black;background-color : darkgray;border-radius : 20"
-            )
+            "border : 2px solid black;background-color : darkgray;border-radius : 20"
+        )
         for j in range(2):
             font = self.font()
             font.setPointSize(11)
@@ -89,50 +88,50 @@ class MainWindow(QMainWindow, QWidget):
                 "border-radius : 15;border : 1px solid lightgray;background-color : darkgray"
             )
         self.okbtn.append(QPushButton("OK", self))
-        self.okbtn[0].setGeometry(595, 335 , 32, 32)
+        self.okbtn[0].setGeometry(595, 335, 32, 32)
         self.okbtn[0].setStyleSheet(
             "color: black;border-radius : 16;border : 2px solid lightgray;background-color :gray"
         )
-        self.okbtn[0].clicked.connect(self.setExtReq)    
+        self.okbtn[0].clicked.connect(self.setExtReq)
         self.textbox.append(QLineEdit(self))
         self.textbox[2].setGeometry(255, 27, 270, 40)
         self.textbox[2].setFont(font)
         self.textbox[2].setStyleSheet(
-                "border : 2px solid darkgray;background-color : black"
-            )
+            "border : 2px solid darkgray;background-color : black"
+        )
 
         self.textbox.append(QLineEdit(self))
         self.textbox[3].setGeometry(150, 270, 60, 100)
         self.textbox[3].setFont(font)
         self.textbox[3].setStyleSheet(
-                "border : 2px solid black;background-color : darkgray;border-radius : 20"
-            )
-        
-        self.Btn2.append(QPushButton("⏯", self))
+            "border : 2px solid black;background-color : darkgray;border-radius : 20"
+        )
+
+        self.Btn2.append(QPushButton("懶", self))
         font.setPointSize(18)
         self.Btn2[0].setFont(font)
-        self.Btn2[0].setGeometry(167, 305 , 32, 32)
+        self.Btn2[0].setGeometry(167, 305, 32, 32)
         self.Btn2[0].setStyleSheet(
             "color: black;border-radius : 16;border : 2px solid lightgray;background-color :gray"
         )
-        
+
         for i in range(3):
             font.setPointSize(21)
             self.dir.append(QPushButton("⇈", self))
             font.bold()
             self.dir[i].setFont(font)
-            self.dir[i].setGeometry(280+90*i, 32, 32, 32)
+            self.dir[i].setGeometry(280 + 90 * i, 32, 32, 32)
             self.dir[i].setStyleSheet(
-                "color: darkgreen;border-radius : 16;border : 2px solid black;background-color : balck")
+                "color: darkgreen;border-radius : 16;border : 2px solid black;background-color : balck"
+            )
         self.Btn2[0].clicked.connect(self.pause_elevator)
-        #self.Btn2[0].clicked.connect(self.resume_elevator)
-       
+        # self.Btn2[0].clicked.connect(self.resume_elevator)
 
     def pause_elevator(self):
         self.pause = not self.pause
 
-    #def resume_elevator(self):
-        #self.pause = False
+    # def resume_elevator(self):
+    # self.pause = False
 
     def setExtReq(self):
         elv = elevator.Elevator.nearest_elevator(
@@ -149,11 +148,7 @@ class MainWindow(QMainWindow, QWidget):
             self.elevator3.add_internal_req(i)
 
     def update(self):
-        
         for i in range(16):
-
-         
-
             self.elev1[i].setStyleSheet(
                 "color: black;background-color : lightgray ;border-radius : 50;border : 1px solid darkgray"
             )
@@ -219,31 +214,38 @@ class MainWindow(QMainWindow, QWidget):
             self.elev3[self.elevator3.current_floor].setStyleSheet(
                 "color: lightgray;background-color : darkorange;border-radius : 50;border : 2px solid gray"
             )
-        if(self.elevator1.direction == "DOWN"):
-            self.dir[0].setText("⇊",)
+        if self.elevator1.direction == "DOWN":
+            self.dir[0].setText(
+                "⇊",
+            )
             self.dir[0].setStyleSheet(
-                "color: darkorange;border-radius : 16;border : 2px solid black;background-color : black ")
-        if(self.elevator2.direction == "DOWN"):
+                "color: darkorange;border-radius : 16;border : 2px solid black;background-color : black "
+            )
+        if self.elevator2.direction == "DOWN":
             self.dir[1].setText("⇊")
             self.dir[1].setStyleSheet(
-                "color: darkorange;border-radius : 16;border : 2px solid black;background-color : balck")
-        if(self.elevator3.direction == "DOWN"):
+                "color: darkorange;border-radius : 16;border : 2px solid black;background-color : balck"
+            )
+        if self.elevator3.direction == "DOWN":
             self.dir[2].setText("⇊")
             self.dir[2].setStyleSheet(
-                "color: darkorange;border-radius : 16;border : 2px solid black;background-color : balck")
+                "color: darkorange;border-radius : 16;border : 2px solid black;background-color : balck"
+            )
 
-           
-        if(self.elevator1.direction == "UP"):
+        if self.elevator1.direction == "UP":
             self.dir[0].setText("⇈")
             self.dir[0].setStyleSheet(
-                "color: darkgreen;border-radius : 16;border : 2px solid black;background-color : balck")
+                "color: darkgreen;border-radius : 16;border : 2px solid black;background-color : balck"
+            )
 
-        if(self.elevator2.direction == "UP"):
+        if self.elevator2.direction == "UP":
             self.dir[1].setText("⇈")
             self.dir[1].setStyleSheet(
-                "color: darkgreen;border-radius : 16;border : 2px solid black;background-color : balck")
+                "color: darkgreen;border-radius : 16;border : 2px solid black;background-color : balck"
+            )
 
-        if(self.elevator3.direction == "UP"):
+        if self.elevator3.direction == "UP":
             self.dir[2].setText("⇈")
             self.dir[2].setStyleSheet(
-                "color: darkgreen;border-radius : 16;border : 2px solid black;background-color : balck ")
+                "color: darkgreen;border-radius : 16;border : 2px solid black;background-color : balck "
+            )

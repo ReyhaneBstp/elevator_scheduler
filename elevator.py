@@ -8,8 +8,8 @@ class Elevator:
         self.current_floor = 0
         self.direction = "UP"
         self.is_stop = True
-        self.internal_req = []  # tuple (floor , age)
-        self.external_req = []  # tuple (floor , destination, age)
+        self.internal_req = []  # (floor , age)
+        self.external_req = []  # (floor , destination, age)
         self.num = num
         self.age_rate = 1
         self.direction_keep_rate = 2
