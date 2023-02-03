@@ -68,7 +68,12 @@ class MainWindow(QMainWindow, QWidget):
                 "color: black;background-color : lightgray ;border-radius : 50;border : 1px solid darkgray "
             )
             self.elev3[i].clicked.connect(partial(self.setIntReq, i, j))
-
+        self.rect=QLineEdit(self)
+        self.rect.setGeometry(580, 270, 60, 100)
+        self.rect.setFont(font)
+        self.rect.setStyleSheet(
+                "border : 2px solid black;background-color : darkgray;border-radius : 20"
+            )
         for j in range(2):
             font = self.font()
             font.setPointSize(11)
@@ -78,17 +83,17 @@ class MainWindow(QMainWindow, QWidget):
             if j == 1:
                 self.textbox[j].setToolTip("enter destination floor")
 
-            self.textbox[j].setGeometry(560, 270 + 50 * j, 100, 40)
+            self.textbox[j].setGeometry(597, 280 + 26 * j, 26, 26)
             self.textbox[j].setFont(font)
             self.textbox[j].setStyleSheet(
-                "border-radius : 20;border : 2px solid black;background-color : darkgray"
+                "border-radius : 15;border : 1px solid lightgray;background-color : darkgray"
             )
-            self.okbtn.append(QPushButton("OK", self))
-            self.okbtn[j].setGeometry(625, 275 + 50 * j, 32, 32)
-            self.okbtn[j].setStyleSheet(
-                "color: black;border-radius : 16;border : 2px solid lightgray;background-color :gray"
-            )
-            self.okbtn[j].clicked.connect(self.setExtReq)
+        self.okbtn.append(QPushButton("OK", self))
+        self.okbtn[0].setGeometry(595, 335 , 32, 32)
+        self.okbtn[0].setStyleSheet(
+            "color: black;border-radius : 16;border : 2px solid lightgray;background-color :gray"
+        )
+        self.okbtn[0].clicked.connect(self.setExtReq)    
         self.textbox.append(QLineEdit(self))
         self.textbox[2].setGeometry(255, 27, 270, 40)
         self.textbox[2].setFont(font)
@@ -103,12 +108,12 @@ class MainWindow(QMainWindow, QWidget):
                 "border : 2px solid black;background-color : darkgray;border-radius : 20"
             )
         
-        self.Btn2.append(QPushButton(" ⏴ ", self))
+        self.Btn2.append(QPushButton("⏯", self))
         font.setPointSize(18)
         self.Btn2[0].setFont(font)
-        self.Btn2[0].setGeometry(168, 307 , 28, 28)
+        self.Btn2[0].setGeometry(167, 305 , 32, 32)
         self.Btn2[0].setStyleSheet(
-            "color: black;border-radius : 14;border : 2px solid lightgray;background-color :gray"
+            "color: black;border-radius : 16;border : 2px solid lightgray;background-color :gray"
         )
         
         for i in range(3):
