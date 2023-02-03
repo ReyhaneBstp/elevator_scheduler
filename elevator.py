@@ -13,6 +13,7 @@ class Elevator:
         self.num = num
         self.age_rate = 1
         self.direction_keep_rate = 2
+        self.distance_rate = 1
 
     def log(self, msg):
         print("elevator " + str(self.num) + ": " + msg)
@@ -85,10 +86,10 @@ class Elevator:
         v_down = 0
         for f in self.internal_req + self.external_req:
             if f.floor > self.current_floor:
-                v_up += 15 - (f.floor - self.current_floor)
+                v_up += (15 - (f.floor - self.current_floor)) * self.distance_rate
                 v_up += f.age
             elif f.floor < self.current_floor:
-                v_down += 15 - (self.current_floor - f.floor)
+                v_down += (15 - (self.current_floor - f.floor)) * self.distance_rate
                 v_down += f.age
         if self.direction == "UP":
             if v_up * self.direction_keep_rate > v_down:
