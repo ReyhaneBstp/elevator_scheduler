@@ -17,6 +17,7 @@ class MainWindow(QMainWindow, QWidget):
         self.elev1 = []
         self.elev2 = []
         self.elev3 = []
+        self.dir = []
         self.textbox = []
         self.okbtn = []
         self.saveInfo = []
@@ -28,6 +29,7 @@ class MainWindow(QMainWindow, QWidget):
         self.pause = False
 
     def create_elevators(self):
+        
         for i in range(16):
             j = 1
             font = self.font()
@@ -104,6 +106,15 @@ class MainWindow(QMainWindow, QWidget):
             self.Btn2[j].setStyleSheet(
                 "color: black;border-radius : 14;border : 2px solid black;background-color :darkgray"
             )
+
+        for i in range(3):
+            font.setPointSize(21)
+            self.dir.append(QPushButton("⇈", self))
+            font.bold()
+            self.dir[i].setFont(font)
+            self.dir[i].setGeometry(280+90*i, 560, 32, 32)
+            self.dir[i].setStyleSheet(
+                "color: darkgreen;border-radius : 16;border : 2px solid black;background-color : balck")
         self.Btn2[0].clicked.connect(self.pause_elevator)
         self.Btn2[1].clicked.connect(self.resume_elevator)
 
@@ -131,7 +142,11 @@ class MainWindow(QMainWindow, QWidget):
             print(i)
 
     def update(self):
+        
         for i in range(16):
+
+         
+
             self.elev1[i].setStyleSheet(
                 "color: black;background-color : lightgray ;border-radius : 50;border : 1px solid darkgray"
             )
@@ -177,7 +192,7 @@ class MainWindow(QMainWindow, QWidget):
             )
         else:
             self.elev1[self.elevator1.current_floor].setStyleSheet(
-                "color: lightgray;background-color : darkorange;border-radius : 50;border : 2px solid black"
+                "color: lightgray;background-color : darkorange;border-radius : 50;border : 2px solid gray"
             )
 
         if self.elevator2.is_stop:
@@ -186,7 +201,7 @@ class MainWindow(QMainWindow, QWidget):
             )
         else:
             self.elev2[self.elevator2.current_floor].setStyleSheet(
-                "color: lightgray;background-color : darkorange;border-radius : 50;border : 2px solid black"
+                "color: lightgray;background-color : darkorange;border-radius : 50;border : 2px solid gray"
             )
 
         if self.elevator3.is_stop:
@@ -195,5 +210,33 @@ class MainWindow(QMainWindow, QWidget):
             )
         else:
             self.elev3[self.elevator3.current_floor].setStyleSheet(
-                "color: lightgray;background-color : darkorange;border-radius : 50;border : 2px solid black"
+                "color: lightgray;background-color : darkorange;border-radius : 50;border : 2px solid gray"
             )
+        if(self.elevator1.direction == "DOWN"):
+            self.dir[0].setText("⇊",)
+            self.dir[0].setStyleSheet(
+                "color: darkorange;border-radius : 16;border : 2px solid black;background-color : black ")
+        if(self.elevator2.direction == "DOWN"):
+            self.dir[1].setText("⇊")
+            self.dir[1].setStyleSheet(
+                "color: darkorange;border-radius : 16;border : 2px solid black;background-color : balck")
+        if(self.elevator3.direction == "DOWN"):
+            self.dir[2].setText("⇊")
+            self.dir[2].setStyleSheet(
+                "color: darkorange;border-radius : 16;border : 2px solid black;background-color : balck")
+
+           
+        if(self.elevator1.direction == "UP"):
+            self.dir[0].setText("⇈")
+            self.dir[0].setStyleSheet(
+                "color: darkgreen;border-radius : 16;border : 2px solid black;background-color : balck")
+
+        if(self.elevator2.direction == "UP"):
+            self.dir[1].setText("⇈")
+            self.dir[1].setStyleSheet(
+                "color: darkgreen;border-radius : 16;border : 2px solid black;background-color : balck")
+
+        if(self.elevator3.direction == "UP"):
+            self.dir[2].setText("⇈")
+            self.dir[2].setStyleSheet(
+                "color: darkgreen;border-radius : 16;border : 2px solid black;background-color : balck ")
