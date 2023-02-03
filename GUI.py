@@ -36,7 +36,7 @@ class MainWindow(QMainWindow, QWidget):
             font.setPointSize(16)
             self.elev1.append(QPushButton(self))
             self.elev1[i].setFont(font)
-            self.elev1[i].setGeometry(270, 520 - 30 * i, 60, 30)
+            self.elev1[i].setGeometry(270, 520 - (30) * i, 60, 30)
             self.elev1[i].setText(str(i))
             self.elev1[i].setStyleSheet(
                 "color: black;background-color : lightgray ;border-radius : 50;border : 1px solid darkgray"
@@ -86,32 +86,31 @@ class MainWindow(QMainWindow, QWidget):
             self.okbtn.append(QPushButton("OK", self))
             self.okbtn[j].setGeometry(625, 275 + 50 * j, 32, 32)
             self.okbtn[j].setStyleSheet(
-                "color: lightgray;border-radius : 16;border : 2px solid black;background-color : black"
+                "color: black;border-radius : 16;border : 2px solid lightgray;background-color :gray"
             )
             self.okbtn[j].clicked.connect(self.setExtReq)
-
-        for j in range(2):
-            self.Btn1.append(QPushButton("", self))
-            self.Btn1[j].setGeometry(162, 269 + 50 * j, 40, 40)
-            self.Btn1[j].setStyleSheet(
-                "color: black;border-radius : 20;border : 2px solid black;background-color : black"
-            )
-            if j == 0:
-                self.Btn2.append(QPushButton(" ⏸ ", self))
-            if j == 1:
-                self.Btn2.append(QPushButton(" ⏴ ", self))
-            font.setPointSize(18)
-            self.Btn2[j].setFont(font)
-            self.Btn2[j].setGeometry(168, 275 + 50 * j, 28, 28)
-            self.Btn2[j].setStyleSheet(
-                "color: black;border-radius : 14;border : 2px solid black;background-color :darkgray"
-            )
         self.textbox.append(QLineEdit(self))
         self.textbox[2].setGeometry(255, 27, 270, 40)
         self.textbox[2].setFont(font)
         self.textbox[2].setStyleSheet(
-                "border : 2px solid lightgray;background-color : black"
+                "border : 2px solid darkgray;background-color : black"
             )
+
+        self.textbox.append(QLineEdit(self))
+        self.textbox[3].setGeometry(150, 270, 60, 100)
+        self.textbox[3].setFont(font)
+        self.textbox[3].setStyleSheet(
+                "border : 2px solid black;background-color : darkgray;border-radius : 20"
+            )
+        
+        self.Btn2.append(QPushButton(" ⏴ ", self))
+        font.setPointSize(18)
+        self.Btn2[0].setFont(font)
+        self.Btn2[0].setGeometry(168, 307 , 28, 28)
+        self.Btn2[0].setStyleSheet(
+            "color: black;border-radius : 14;border : 2px solid lightgray;background-color :gray"
+        )
+        
         for i in range(3):
             font.setPointSize(21)
             self.dir.append(QPushButton("⇈", self))
@@ -121,14 +120,14 @@ class MainWindow(QMainWindow, QWidget):
             self.dir[i].setStyleSheet(
                 "color: darkgreen;border-radius : 16;border : 2px solid black;background-color : balck")
         self.Btn2[0].clicked.connect(self.pause_elevator)
-        self.Btn2[1].clicked.connect(self.resume_elevator)
+        #self.Btn2[0].clicked.connect(self.resume_elevator)
        
 
     def pause_elevator(self):
-        self.pause = True
+        self.pause = not self.pause
 
-    def resume_elevator(self):
-        self.pause = False
+    #def resume_elevator(self):
+        #self.pause = False
 
     def setExtReq(self):
         elv = elevator.Elevator.nearest_elevator(
