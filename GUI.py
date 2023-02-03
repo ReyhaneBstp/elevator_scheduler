@@ -106,17 +106,23 @@ class MainWindow(QMainWindow, QWidget):
             self.Btn2[j].setStyleSheet(
                 "color: black;border-radius : 14;border : 2px solid black;background-color :darkgray"
             )
-
+        self.textbox.append(QLineEdit(self))
+        self.textbox[2].setGeometry(255, 27, 270, 40)
+        self.textbox[2].setFont(font)
+        self.textbox[2].setStyleSheet(
+                "border : 2px solid lightgray;background-color : black"
+            )
         for i in range(3):
             font.setPointSize(21)
             self.dir.append(QPushButton("⇈", self))
             font.bold()
             self.dir[i].setFont(font)
-            self.dir[i].setGeometry(280+90*i, 560, 32, 32)
+            self.dir[i].setGeometry(280+90*i, 32, 32, 32)
             self.dir[i].setStyleSheet(
                 "color: darkgreen;border-radius : 16;border : 2px solid black;background-color : balck")
         self.Btn2[0].clicked.connect(self.pause_elevator)
         self.Btn2[1].clicked.connect(self.resume_elevator)
+       
 
     def pause_elevator(self):
         self.pause = True
