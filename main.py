@@ -24,7 +24,7 @@ def move():
 
 stylesheet = """
     MainWindow {
-        border-image: url("elev1.jpg"); 
+        border-image: url("elev2.jpg"); 
         background-repeat: no-repeat; 
         background-position: center;
         

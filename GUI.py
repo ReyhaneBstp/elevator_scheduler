@@ -34,7 +34,7 @@ class MainWindow(QMainWindow, QWidget):
             font.setPointSize(16)
             self.elev1.append(QPushButton(self))
             self.elev1[i].setFont(font)
-            self.elev1[i].setGeometry(270, 517 - 30 * i, 60, 30)
+            self.elev1[i].setGeometry(270, 520 - 30 * i, 60, 30)
             self.elev1[i].setText(str(i))
             self.elev1[i].setStyleSheet(
                 "color: black;background-color : lightgray ;border-radius : 50;border : 1px solid darkgray"
@@ -47,7 +47,7 @@ class MainWindow(QMainWindow, QWidget):
             font.setPointSize(16)
             self.elev2.append(QPushButton(self))
             self.elev2[i].setFont(font)
-            self.elev2[i].setGeometry(360, 517 - 30 * i, 60, 30)
+            self.elev2[i].setGeometry(360, 520 - 30 * i, 60, 30)
             self.elev2[i].setText(str(i))
             self.elev2[i].setStyleSheet(
                 "color: black;background-color : lightgray ;border-radius : 50;border : 1px solid darkgray"
@@ -60,7 +60,7 @@ class MainWindow(QMainWindow, QWidget):
             font.setPointSize(16)
             self.elev3.append(QPushButton(self))
             self.elev3[i].setFont(font)
-            self.elev3[i].setGeometry(450, 517 - 30 * i, 60, 30)
+            self.elev3[i].setGeometry(450, 520 - 30 * i, 60, 30)
             self.elev3[i].setText(str(i))
             self.elev3[i].setStyleSheet(
                 "color: black;background-color : lightgray ;border-radius : 50;border : 1px solid darkgray "
@@ -95,9 +95,9 @@ class MainWindow(QMainWindow, QWidget):
                 "color: black;border-radius : 20;border : 2px solid black;background-color : black"
             )
             if j == 0:
-                self.Btn2.append(QPushButton("⏸", self))
+                self.Btn2.append(QPushButton(" ⏸ ", self))
             if j == 1:
-                self.Btn2.append(QPushButton("⏴", self))
+                self.Btn2.append(QPushButton(" ⏴ ", self))
             font.setPointSize(18)
             self.Btn2[j].setFont(font)
             self.Btn2[j].setGeometry(168, 275 + 50 * j, 28, 28)
